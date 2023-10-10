@@ -39,6 +39,7 @@ public class Lab2 extends Application {
         shapes.getItems().addAll(point, line, circle, rectangle);
 
         line.setOnAction(actionEvent -> shapeEditor.startLineEditor());
+        point.setOnAction(actionEvent -> shapeEditor.startPointEditor());
 
 
         layout.setTop(menuBar);
