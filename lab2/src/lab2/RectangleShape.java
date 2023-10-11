@@ -28,11 +28,8 @@ public class RectangleShape extends Shape {
 
 
                 gc.setStroke(Color.BLACK);
-                if (isDotted) {
-                    gc.setLineDashes(5, 5);
-                } else {
-                    gc.setLineDashes(0);
-                }
+
+                gc.setLineDashes(5, 5);
                 gc.setLineWidth(2);
             }
         });
@@ -41,10 +38,16 @@ public class RectangleShape extends Shape {
                 double endX = event.getX();
                 double endY = event.getY();
 
-                gc.clearRect(startX, startY, endX - startX, endY - startY);
+                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+                for (Rectangle rectangle:rectangles) {
+                    gc.setLineDashes(0);
+                    gc.strokeRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+                    gc.setLineDashes(5, 5);
+                }
 
                 gc.strokeRect(startX, startY, endX - startX, endY - startY);
-                gc.setLineDashes(5, 5);
+               // gc.setLineDashes(5, 5);
                 gc.setFill(Color.TRANSPARENT);
         });
 
