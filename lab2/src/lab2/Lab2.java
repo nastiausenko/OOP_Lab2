@@ -40,6 +40,7 @@ public class Lab2 extends Application {
 
         line.setOnAction(actionEvent -> shapeEditor.startLineEditor());
         point.setOnAction(actionEvent -> shapeEditor.startPointEditor());
+        rectangle.setOnAction(actionEvent -> shapeEditor.startRectangleEditor());
 
 
         layout.setTop(menuBar);

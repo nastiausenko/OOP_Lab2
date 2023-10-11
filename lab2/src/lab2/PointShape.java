@@ -4,18 +4,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PointShape extends Shape {
-    private double startX, startY;
-    private Canvas canvas;
-    private GraphicsContext gc;
-    private List<Line> lines = new ArrayList<>();
-    private boolean isDrawing = false;
-
     public PointShape(Canvas canvas, GraphicsContext gc) {
         this.canvas = canvas;
         this.gc = gc;
