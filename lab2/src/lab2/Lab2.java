@@ -31,13 +31,24 @@ public class Lab2 extends Application {
 
         shapes.getItems().addAll(point, line, ellipse, rectangle);
 
-        rectangle.setOnAction(actionEvent -> shapeEditor.startRectangleEditor(scene, layout));
-        line.setOnAction(actionEvent -> shapeEditor.startLineEditor(scene, layout));
-        point.setOnAction(actionEvent -> shapeEditor.startPointEditor(scene, layout));
-        ellipse.setOnAction(actionEvent -> shapeEditor.startEllipseEditor(scene, layout));
-
-
         layout.setTop(menuBar);
+
+        rectangle.setOnAction(actionEvent -> {
+            shapeEditor.startRectangleEditor(scene, layout);
+            stage.setTitle("Rectangle");
+        });
+        line.setOnAction(actionEvent -> {
+            shapeEditor.startLineEditor(scene, layout);
+            stage.setTitle("Line");
+        });
+        point.setOnAction(actionEvent -> {
+            shapeEditor.startPointEditor(scene, layout);
+            stage.setTitle("Point");
+        });
+        ellipse.setOnAction(actionEvent -> {
+            shapeEditor.startEllipseEditor(scene, layout);
+            stage.setTitle("Ellipse");
+        });
 
         stage.setScene(scene);
         stage.setTitle("Lab2");
