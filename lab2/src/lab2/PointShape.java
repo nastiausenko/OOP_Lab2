@@ -1,28 +1,31 @@
 package lab2;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseButton;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
+
 
 public class PointShape extends Shape {
-    public PointShape(Canvas canvas, GraphicsContext gc) {
-        this.canvas = canvas;
-        this.gc = gc;
+    private Ellipse currentPoint;
+
+    public PointShape(Scene scene, Pane root) {
+        super(scene, root);
     }
+
     @Override
     public void show() {
-            canvas.setOnMousePressed(event -> {
-                if (event.getButton() == MouseButton.PRIMARY) {
-                    double x = event.getX();
-                    double y = event.getY();
+        scene.setOnMousePressed(event -> {
+            currentPoint = new Ellipse();
+            currentPoint.setCenterX(event.getX());
+            currentPoint.setCenterY(event.getY());
+            currentPoint.setRadiusX(5);
+            currentPoint.setRadiusY(5);
+            currentPoint.setFill(Color.BLACK);
+            points.add(currentPoint);
+            root.getChildren().add(currentPoint);
+        });
 
-                    gc.setFill(Color.BLACK); // Встановлює колір крапки на чорний (або інший бажаний колір)
-                    double pointSize = 15;    // Розмір крапки (можете змінити на бажаний)
-
-                    // Малюємо крапку на позиції (x, y)
-                    gc.fillOval(x - pointSize / 2, y - pointSize / 2, pointSize, pointSize);
-                }
-            });
+        scene.setOnMouseReleased(event -> currentPoint = null);
     }
 }

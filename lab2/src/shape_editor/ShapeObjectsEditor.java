@@ -1,32 +1,31 @@
 package shape_editor;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import lab2.EllipseShape;
 import lab2.LineShape;
 import lab2.PointShape;
 import lab2.RectangleShape;
 
 public class ShapeObjectsEditor {
-    private Canvas canvas;
-    private GraphicsContext gc;
-    public double startX, startY, endX, endY;
 
-    public ShapeObjectsEditor(Canvas canvas, GraphicsContext gc) {
-        this.canvas = canvas;
-        this.gc = gc;
+    public void startRectangleEditor(Scene scene, Pane root) {
+        RectangleShape rectangle = new RectangleShape(scene, root);
+        rectangle.show();
     }
-    public void startLineEditor(){
-        LineShape line = new LineShape(canvas, gc);
+
+    public void startLineEditor(Scene scene, Pane root){
+        LineShape line= new LineShape(scene, root);
         line.show();
     }
 
-    public void startPointEditor(){
-        PointShape point = new PointShape(canvas, gc);
+    public void startPointEditor(Scene scene, Pane root){
+        PointShape point = new PointShape(scene, root);
         point.show();
     }
 
-    public void startRectangleEditor() {
-        RectangleShape rectangle = new RectangleShape(canvas, gc);
-        rectangle.show();
+    public void startEllipseEditor(Scene scene, Pane root){
+        EllipseShape ellipseShape = new EllipseShape(scene, root);
+        ellipseShape.show();
     }
 }

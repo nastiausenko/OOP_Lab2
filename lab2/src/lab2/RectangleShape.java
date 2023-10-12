@@ -1,67 +1,47 @@
 package lab2;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseButton;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
-import java.util.ArrayList;
-import java.util.List;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
 
 public class RectangleShape extends Shape {
-    private List<Rectangle> rectangles = new ArrayList<>();
-    private boolean isDotted = true;
+    private Rectangle currentRectangle;
 
-    public RectangleShape(Canvas canvas, GraphicsContext gc) {
-        this.canvas = canvas;
-        this.gc = gc;
+    public RectangleShape(Scene scene, Pane root) {
+        super(scene, root);
     }
 
     @Override
     public void show() {
-        canvas.setOnMousePressed(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                startX = event.getX();
-                startY = event.getY();
-                isDotted = true;
+        scene.setOnMousePressed(event -> {
+            currentRectangle = new Rectangle();
+            currentRectangle.setX(event.getX());
+            currentRectangle.setY(event.getY());
+            currentRectangle.setWidth(0);
+            currentRectangle.setHeight(0);
+            currentRectangle.setStroke(Color.BLACK);
+            currentRectangle.setStrokeWidth(1.5);
+            currentRectangle.setFill(null);
+            rectangles.add(currentRectangle);
+            root.getChildren().add(currentRectangle);
+        });
 
-
-                gc.setStroke(Color.BLACK);
-
-                gc.setLineDashes(5, 5);
-                gc.setLineWidth(2);
+        scene.setOnMouseDragged(event -> {
+            if (currentRectangle != null) {
+                currentRectangle.setStrokeLineCap(StrokeLineCap.BUTT);
+                currentRectangle.setStrokeLineJoin(StrokeLineJoin.MITER);
+                currentRectangle.getStrokeDashArray().addAll(5.0, 5.0);
+                currentRectangle.setWidth(event.getX() - currentRectangle.getX());
+                currentRectangle.setHeight(event.getY() - currentRectangle.getY());
             }
         });
 
-        canvas.setOnMouseDragged(event -> {
-                double endX = event.getX();
-                double endY = event.getY();
-
-                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-                for (Rectangle rectangle:rectangles) {
-                    gc.setLineDashes(0);
-                    gc.strokeRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
-                    gc.setLineDashes(5, 5);
-                }
-
-                gc.strokeRect(startX, startY, endX - startX, endY - startY);
-               // gc.setLineDashes(5, 5);
-                gc.setFill(Color.TRANSPARENT);
-        });
-
-        canvas.setOnMouseReleased(event -> {
-                double endX = event.getX();
-                double endY = event.getY();
-
-                gc.setLineDashes(0);
-                gc.setStroke(Color.BLACK);
-                gc.setLineWidth(2);
-
-                gc.strokeRect(startX, startY, endX - startX, endY - startY);
-
-                rectangles.add(new Rectangle(startX, startY, endX - startX, endY - startY));
+        scene.setOnMouseReleased(event -> {
+            currentRectangle.getStrokeDashArray().clear();
+            currentRectangle = null;
         });
     }
 }

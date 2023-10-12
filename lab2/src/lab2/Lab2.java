@@ -2,8 +2,6 @@ package lab2;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -12,17 +10,12 @@ import javafx.stage.Stage;
 import shape_editor.ShapeObjectsEditor;
 
 public class Lab2 extends Application {
-    private ShapeObjectsEditor shapeEditor;
-
     @Override
     public void start(Stage stage) {
         BorderPane layout = new BorderPane();
-        Canvas canvas = new Canvas(700, 500);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        Scene scene = new Scene(layout, 700, 500);
 
-        layout.setCenter(canvas);
-
-        shapeEditor = new ShapeObjectsEditor(canvas, gc);
+        ShapeObjectsEditor shapeEditor = new ShapeObjectsEditor();
 
         MenuBar menuBar = new MenuBar();
         Menu file = new Menu("File");
@@ -33,19 +26,19 @@ public class Lab2 extends Application {
 
         MenuItem point = new MenuItem("Point");
         MenuItem line = new MenuItem("Line");
-        MenuItem circle = new MenuItem("Circle");
+        MenuItem ellipse = new MenuItem("Ellipse");
         MenuItem rectangle = new MenuItem("Rectangle");
 
-        shapes.getItems().addAll(point, line, circle, rectangle);
+        shapes.getItems().addAll(point, line, ellipse, rectangle);
 
-        line.setOnAction(actionEvent -> shapeEditor.startLineEditor());
-        point.setOnAction(actionEvent -> shapeEditor.startPointEditor());
-        rectangle.setOnAction(actionEvent -> shapeEditor.startRectangleEditor());
+        rectangle.setOnAction(actionEvent -> shapeEditor.startRectangleEditor(scene, layout));
+        line.setOnAction(actionEvent -> shapeEditor.startLineEditor(scene, layout));
+        point.setOnAction(actionEvent -> shapeEditor.startPointEditor(scene, layout));
+        ellipse.setOnAction(actionEvent -> shapeEditor.startEllipseEditor(scene, layout));
 
 
         layout.setTop(menuBar);
 
-        Scene scene = new Scene(layout, 700, 500);
         stage.setScene(scene);
         stage.setTitle("Lab2");
         stage.show();

@@ -1,48 +1,37 @@
 package lab2;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseButton;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LineShape extends Shape {
-    private List<Line> lines = new ArrayList<>();
 
-    public LineShape(Canvas canvas, GraphicsContext gc) {
-        this.canvas = canvas;
-        this.gc = gc;
+    private Line currentLine;
+    public LineShape(Scene scene, Pane root) {
+        super(scene, root);
     }
+
     @Override
     public void show() {
-        canvas.setOnMousePressed(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                startX = event.getX();
-                startY = event.getY();
-                gc.setLineWidth(2);
+        scene.setOnMousePressed(event -> {
+            currentLine = new Line();
+            currentLine.setStartX(event.getX());
+            currentLine.setStartY(event.getY());
+            currentLine.setEndX(event.getX());
+            currentLine.setEndY(event.getY());
+            currentLine.setStroke(Color.BLACK);
+            currentLine.setStrokeWidth(1.5);
+            lines.add(currentLine);
+            root.getChildren().add(currentLine);
+        });
+
+        scene.setOnMouseDragged(event -> {
+            if (currentLine != null) {
+                currentLine.setEndX(event.getX());
+                currentLine.setEndY(event.getY());
             }
         });
-
-        canvas.setOnMouseDragged(event -> {
-                double endX = event.getX();
-                double endY = event.getY();
-
-                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-                for (Line line : lines) {
-                    gc.strokeLine(line.getStartX(), line.getStartY(), line.getEndX(), line.getEndY());
-                }
-                gc.strokeLine(startX, startY, endX, endY);
-        });
-
-        canvas.setOnMouseReleased(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                double endX = event.getX();
-                double endY = event.getY();
-                lines.add(new Line(startX, startY, endX, endY));
-            }
-        });
+        scene.setOnMouseReleased(event -> currentLine = null);
     }
 }
