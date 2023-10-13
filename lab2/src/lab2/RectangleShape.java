@@ -16,7 +16,7 @@ public class RectangleShape extends Shape {
 
     @Override
     public void show() {
-        scene.setOnMousePressed(event -> {
+        root.setOnMousePressed(event -> {
             currentRectangle = new Rectangle();
             currentRectangle.setX(event.getX());
             currentRectangle.setY(event.getY());
@@ -29,7 +29,7 @@ public class RectangleShape extends Shape {
             root.getChildren().add(currentRectangle);
         });
 
-        scene.setOnMouseDragged(event -> {
+        root.setOnMouseDragged(event -> {
             if (currentRectangle != null) {
                 currentRectangle.setStrokeLineCap(StrokeLineCap.BUTT);
                 currentRectangle.setStrokeLineJoin(StrokeLineJoin.MITER);
@@ -39,7 +39,7 @@ public class RectangleShape extends Shape {
             }
         });
 
-        scene.setOnMouseReleased(event -> {
+        root.setOnMouseReleased(event -> {
             currentRectangle.getStrokeDashArray().clear();
             currentRectangle = null;
         });

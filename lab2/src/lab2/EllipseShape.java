@@ -16,7 +16,7 @@ public class EllipseShape extends Shape{
 
     @Override
     public void show() {
-        scene.setOnMousePressed(event -> {
+        root.setOnMousePressed(event -> {
             currentEllipse = new Ellipse();
             currentEllipse.setCenterX(event.getX() - currentEllipse.getCenterX());
             currentEllipse.setCenterY(event.getY() - currentEllipse.getCenterY());
@@ -29,7 +29,7 @@ public class EllipseShape extends Shape{
             root.getChildren().add(currentEllipse);
         });
 
-        scene.setOnMouseDragged(event -> {
+        root.setOnMouseDragged(event -> {
             if (currentEllipse != null) {
                 currentEllipse.setStrokeLineCap(StrokeLineCap.BUTT);
                 currentEllipse.setStrokeLineJoin(StrokeLineJoin.MITER);
@@ -39,7 +39,7 @@ public class EllipseShape extends Shape{
             }
         });
 
-        scene.setOnMouseReleased(event -> {
+        root.setOnMouseReleased(event -> {
             currentEllipse.getStrokeDashArray().clear();
             currentEllipse.setStroke(Color.BLACK);
             currentEllipse.setFill(Color.ORANGE);

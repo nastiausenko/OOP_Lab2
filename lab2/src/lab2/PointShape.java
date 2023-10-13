@@ -15,7 +15,7 @@ public class PointShape extends Shape {
 
     @Override
     public void show() {
-        scene.setOnMousePressed(event -> {
+        root.setOnMousePressed(event -> {
             currentPoint = new Ellipse();
             currentPoint.setCenterX(event.getX());
             currentPoint.setCenterY(event.getY());
@@ -26,6 +26,6 @@ public class PointShape extends Shape {
             root.getChildren().add(currentPoint);
         });
 
-        scene.setOnMouseReleased(event -> currentPoint = null);
+        root.setOnMouseReleased(event -> currentPoint = null);
     }
 }

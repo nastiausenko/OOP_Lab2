@@ -14,7 +14,7 @@ public class LineShape extends Shape {
 
     @Override
     public void show() {
-        scene.setOnMousePressed(event -> {
+        root.setOnMousePressed(event -> {
             currentLine = new Line();
             currentLine.setStartX(event.getX());
             currentLine.setStartY(event.getY());
@@ -26,12 +26,12 @@ public class LineShape extends Shape {
             root.getChildren().add(currentLine);
         });
 
-        scene.setOnMouseDragged(event -> {
+        root.setOnMouseDragged(event -> {
             if (currentLine != null) {
                 currentLine.setEndX(event.getX());
                 currentLine.setEndY(event.getY());
             }
         });
-        scene.setOnMouseReleased(event -> currentLine = null);
+        root.setOnMouseReleased(event -> currentLine = null);
     }
 }

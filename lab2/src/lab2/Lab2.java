@@ -6,6 +6,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import shape_editor.ShapeObjectsEditor;
 
@@ -13,11 +14,14 @@ public class Lab2 extends Application {
     @Override
     public void start(Stage stage) {
         BorderPane layout = new BorderPane();
+        Pane drawingArea = new Pane();
+        layout.setCenter(drawingArea);
         Scene scene = new Scene(layout, 700, 500);
 
         ShapeObjectsEditor shapeEditor = new ShapeObjectsEditor();
 
         MenuBar menuBar = new MenuBar();
+        drawingArea.setMaxHeight(scene.getHeight() - menuBar.getHeight());
         Menu file = new Menu("File");
         Menu shapes = new Menu("Shapes");
         Menu help = new Menu("Help");
@@ -34,19 +38,19 @@ public class Lab2 extends Application {
         layout.setTop(menuBar);
 
         rectangle.setOnAction(actionEvent -> {
-            shapeEditor.startRectangleEditor(scene, layout);
+            shapeEditor.startRectangleEditor(scene, drawingArea);
             stage.setTitle("Rectangle");
         });
         line.setOnAction(actionEvent -> {
-            shapeEditor.startLineEditor(scene, layout);
+            shapeEditor.startLineEditor(scene, drawingArea);
             stage.setTitle("Line");
         });
         point.setOnAction(actionEvent -> {
-            shapeEditor.startPointEditor(scene, layout);
+            shapeEditor.startPointEditor(scene, drawingArea);
             stage.setTitle("Point");
         });
         ellipse.setOnAction(actionEvent -> {
-            shapeEditor.startEllipseEditor(scene, layout);
+            shapeEditor.startEllipseEditor(scene, drawingArea);
             stage.setTitle("Ellipse");
         });
 
