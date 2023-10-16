@@ -14,7 +14,7 @@ public class PointShape extends Shape {
     }
 
     @Override
-    public void show() {
+    public void draw() {
         root.setOnMousePressed(event -> {
             currentPoint = new Ellipse();
             currentPoint.setCenterX(event.getX());
@@ -22,7 +22,6 @@ public class PointShape extends Shape {
             currentPoint.setRadiusX(5);
             currentPoint.setRadiusY(5);
             currentPoint.setFill(Color.BLACK);
-            points.add(currentPoint);
             root.getChildren().add(currentPoint);
         });
 

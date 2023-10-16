@@ -15,7 +15,7 @@ public class EllipseShape extends Shape{
     }
 
     @Override
-    public void show() {
+    public void draw() {
         root.setOnMousePressed(event -> {
             currentEllipse = new Ellipse();
             currentEllipse.setCenterX(event.getX() - currentEllipse.getCenterX());
@@ -25,7 +25,6 @@ public class EllipseShape extends Shape{
             currentEllipse.setStroke(Color.BLACK);
             currentEllipse.setStrokeWidth(1.5);
             currentEllipse.setFill(null);
-            ellipses.add(currentEllipse);
             root.getChildren().add(currentEllipse);
         });
 

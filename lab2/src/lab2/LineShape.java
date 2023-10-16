@@ -13,7 +13,7 @@ public class LineShape extends Shape {
     }
 
     @Override
-    public void show() {
+    public void draw() {
         root.setOnMousePressed(event -> {
             currentLine = new Line();
             currentLine.setStartX(event.getX());
@@ -22,7 +22,6 @@ public class LineShape extends Shape {
             currentLine.setEndY(event.getY());
             currentLine.setStroke(Color.BLACK);
             currentLine.setStrokeWidth(1.5);
-            lines.add(currentLine);
             root.getChildren().add(currentLine);
         });
 

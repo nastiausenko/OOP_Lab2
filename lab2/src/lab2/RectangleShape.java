@@ -15,7 +15,7 @@ public class RectangleShape extends Shape {
     }
 
     @Override
-    public void show() {
+    public void draw() {
         root.setOnMousePressed(event -> {
             currentRectangle = new Rectangle();
             currentRectangle.setX(event.getX());
@@ -25,7 +25,6 @@ public class RectangleShape extends Shape {
             currentRectangle.setStroke(Color.BLACK);
             currentRectangle.setStrokeWidth(1.5);
             currentRectangle.setFill(null);
-            rectangles.add(currentRectangle);
             root.getChildren().add(currentRectangle);
         });
 
