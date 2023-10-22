@@ -2,7 +2,7 @@ package shape_editor;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import lab2.*;
+import shapes.*;
 
 public class ShapeObjectsEditor {
 

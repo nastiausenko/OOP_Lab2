@@ -1,4 +1,4 @@
-package lab2;
+package shapes;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
